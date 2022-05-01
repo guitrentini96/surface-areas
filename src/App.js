@@ -3,14 +3,35 @@ import React from 'react';
 import GeneralContainer from './components/GeneralContainer';
 import TriangleSurfacePage from './components/TriangleSurfacePage';
 import CircleSurfacePage from './components/CircleSurfacePage';
+import PagesToggle from './components/PagesToggle';
 
 import { Stack, Typography } from '@mui/material';
 
 function App() {
   const [state, setState] = React.useState({
+    page: 'triangle',
     showTrianglePage: true,
     showCirclePage: false,
   });
+
+  const setNewPage = (page) => {
+    console.log(`show ${page}`);
+    if (page === 'triangle') {
+      setState({
+        ...state,
+        page: 'triangle',
+        showTrianglePage: true,
+        showCirclePage: false,
+      });
+    } else if (page === 'circle') {
+      setState({
+        ...state,
+        page: 'circle',
+        showTrianglePage: false,
+        showCirclePage: true,
+      });
+    }
+  };
 
   return (
     <GeneralContainer>
@@ -28,6 +49,8 @@ function App() {
         ) : (
           <Typography variant="h4">No page selected</Typography>
         )}
+
+        <PagesToggle page={state.page} setPage={setNewPage} />
       </Stack>
     </GeneralContainer>
   );
