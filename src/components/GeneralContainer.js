@@ -7,7 +7,7 @@ const GeneralContainer = ({ children }) => {
         variant="outlined"
         sx={{
           width: '20rem',
-          backgroundColor: 'beige',
+          backgroundColor: 'white',
           marginTop: '10vh',
           height: '80vh',
           padding: '10px',
