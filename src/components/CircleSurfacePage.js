@@ -75,7 +75,9 @@ export default function CircleSurfacePage() {
       <Typography sx={{ position: 'absolute', top: '100px', left: '250px' }}>
         {state.diameter}
       </Typography>
-      <Stack sx={{ height: '40%', justifyContent: 'space-around' }}>
+      <Stack
+        sx={{ height: '40%', width: '80%', justifyContent: 'space-around' }}
+      >
         {renderTextFields()}
         {/* <Button variant="contained" disabled={state.isInvalid}>
           {state.isInvalid ? state.errorMessage : 'submit'}
