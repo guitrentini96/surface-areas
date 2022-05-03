@@ -5,7 +5,7 @@ import TriangleSurfacePage from './components/TriangleSurfacePage';
 import CircleSurfacePage from './components/CircleSurfacePage';
 import PagesToggle from './components/PagesToggle';
 
-import { Stack, Typography } from '@mui/material';
+import { Stack, Typography, Link } from '@mui/material';
 
 function App() {
   const [state, setState] = React.useState({
@@ -52,6 +52,30 @@ function App() {
         )}
 
         <PagesToggle page={state.page} setPage={setNewPage} />
+      </Stack>
+      <Stack
+        position="fixed"
+        left="0"
+        bottom="0"
+        width="100vw"
+        bgcolor="rgb(25,118,210)"
+        direction="row"
+        justifyContent="center"
+      >
+        <Typography color="white">
+          {' '}
+          built by{' '}
+          <Link
+            href="https://github.com/guitrentini96"
+            underline="hover"
+            target="_blank"
+            rel="noopener"
+            sx={{ color: 'white' }}
+          >
+            Guilherme Campara
+          </Link>{' '}
+          :)
+        </Typography>
       </Stack>
     </GeneralContainer>
   );
