@@ -8,7 +8,7 @@ const GeneralContainer = ({ children }) => {
         sx={{
           width: '20rem',
           backgroundColor: 'white',
-          marginTop: '10vh',
+          marginTop: '5vh',
           height: '80vh',
           padding: '10px',
         }}
