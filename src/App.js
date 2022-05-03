@@ -37,9 +37,10 @@ function App() {
     <GeneralContainer>
       <Stack
         sx={{
+          marginTop: '2%',
           alignItems: 'center',
-          justifyContent: 'space-around',
           height: '100%',
+          justifyContent: 'space-between',
         }}
       >
         {state.showTrianglePage ? (

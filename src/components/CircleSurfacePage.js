@@ -1,4 +1,4 @@
-import { Button, Stack, TextField, Typography } from '@mui/material';
+import { Button, Stack, TextField, Typography, Alert } from '@mui/material';
 import React from 'react';
 
 export default function CircleSurfacePage() {
@@ -18,11 +18,22 @@ export default function CircleSurfacePage() {
       // first check if the bigget is 0:
       const valid = /.*[1-9].*/.test(value);
       // if the value is 0, keep the error message
-      setState({
-        ...state,
-        diameter: value,
-        isInvalid: !valid,
-      });
+      if (valid) {
+        const radius = value / 2;
+        const area = 3.14 * Math.pow(radius, 2);
+        setState({
+          ...state,
+          diameter: value,
+          isInvalid: !valid,
+          area: area,
+        });
+      } else {
+        setState({
+          ...state,
+          diameter: value,
+          isInvalid: !valid,
+        });
+      }
     }
   };
 
@@ -36,6 +47,15 @@ export default function CircleSurfacePage() {
         onChange={handleDiameterInput}
       />
     );
+  };
+
+  const resetValues = () => {
+    setState({
+      diameter: '',
+      area: '',
+      isInvalid: true,
+      errorMessage: 'Enter a valid diameter',
+    });
   };
 
   return (
@@ -57,9 +77,20 @@ export default function CircleSurfacePage() {
       </Typography>
       <Stack sx={{ height: '40%', justifyContent: 'space-around' }}>
         {renderTextFields()}
-        <Button variant="contained" disabled={state.isInvalid}>
+        {/* <Button variant="contained" disabled={state.isInvalid}>
           {state.isInvalid ? state.errorMessage : 'submit'}
-        </Button>
+        </Button> */}
+        <Alert
+          variant="outlined"
+          severity={state.isInvalid ? 'error' : 'success'}
+          action={
+            <Button color="inherit" size="small" onClick={resetValues}>
+              RESET
+            </Button>
+          }
+        >
+          {state.isInvalid ? state.errorMessage : `Area: ${state.area}`}
+        </Alert>
       </Stack>
     </Stack>
   );

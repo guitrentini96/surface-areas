@@ -1,4 +1,4 @@
-import { Button, Stack, TextField, Typography } from '@mui/material';
+import { Alert, Button, Stack, TextField, Typography } from '@mui/material';
 import React from 'react';
 
 export default function TriangleSurfacePage() {
@@ -49,15 +49,23 @@ export default function TriangleSurfacePage() {
             ...state,
             sides: newSidesArray,
             isInvalid: true,
-            errorMessage: 'not a triangle',
+            errorMessage: 'Not a triangle',
           });
         }
         // and finally, if it makes a triangle, the submit button becomes active
         else {
+          const semiPerimeter = perimeter / 2;
+          const area = Math.sqrt(
+            semiPerimeter *
+              (semiPerimeter - parseFloat(newSidesArray[0])) *
+              (semiPerimeter - parseFloat(newSidesArray[1])) *
+              (semiPerimeter - parseFloat(newSidesArray[2]))
+          ).toFixed(3);
           setState({
             ...state,
             sides: newSidesArray,
             isInvalid: false,
+            area: area,
           });
         }
       }
@@ -84,11 +92,20 @@ export default function TriangleSurfacePage() {
     );
   };
 
+  const resetValues = () => {
+    setState({
+      sides: ['', '', ''],
+      area: '',
+      isInvalid: true,
+      errorMessage: 'Needs 3 values',
+    });
+  };
+
   return (
     <Stack
       sx={{
         alignItems: 'center',
-        height: '80%',
+        height: '100%',
         position: 'relative',
       }}
     >
@@ -126,11 +143,28 @@ export default function TriangleSurfacePage() {
       <Typography sx={{ position: 'absolute', top: '250px' }}>
         {state.sides[2]}
       </Typography>
-      <Stack sx={{ height: '40%', justifyContent: 'space-between' }}>
+      <Stack
+        sx={{ height: '40%', width: '80%', justifyContent: 'space-between' }}
+      >
         {renderTextFields()}
-        <Button variant="contained" disabled={state.isInvalid}>
+        {/* <Button
+          variant="contained"
+          disabled={state.isInvalid}
+          onClick={handleSubmit}
+        >
           {state.isInvalid ? state.errorMessage : 'submit'}
-        </Button>
+        </Button> */}
+        <Alert
+          variant="outlined"
+          severity={state.isInvalid ? 'error' : 'success'}
+          action={
+            <Button color="inherit" size="small" onClick={resetValues}>
+              RESET
+            </Button>
+          }
+        >
+          {state.isInvalid ? state.errorMessage : `Area: ${state.area}`}
+        </Alert>
       </Stack>
     </Stack>
   );

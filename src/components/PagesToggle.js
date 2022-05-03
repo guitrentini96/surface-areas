@@ -22,6 +22,7 @@ export default function TogglePages(props) {
       exclusive
       onChange={handleChange}
       aria-label="pages toggle"
+      sx={{ marginBottom: '3%' }}
     >
       <ToggleButton value="triangle" aria-label="centered">
         <ChangeHistory />
